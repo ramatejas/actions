@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - chk_folder
-    if: needs.chk_folder.outputs.run_job_looker_deploy == 'A'
+    if: needs.chk_folder.outputs.run_job_looker_deploy == 'B'
     steps:
       - run: |
           echo "will deploy looker"
