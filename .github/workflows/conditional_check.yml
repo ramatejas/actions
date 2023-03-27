@@ -4,6 +4,10 @@ name: Condition_Check_Git
 on:
   # Allows you to run this workflow manually from the Actions tab
    workflow_dispatch:
+    inputs:
+      obj_id1:
+        required: true
+        type: string
 jobs:
   ram:
     runs-on: ubuntu-latest
