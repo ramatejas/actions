@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - a
-    if: needs.a.outputs.run_job_b == 'B'
+    if: needs.a.outputs.run_job_b == 'A'
     steps:
       - run: |
           echo "will deploy looker"
