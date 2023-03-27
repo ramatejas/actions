@@ -6,33 +6,33 @@ on:
         required: true
         type: string
 jobs:
-  a:
-    name: a
+  chk_folder:
+    name: chk_folder
     runs-on: ubuntu-latest
     steps:
         - run: echo "this is " ${{ github.event.inputs.obj_id1 }}
         - id: set
           run: |
-            echo "::set-output name=run_job_b::${{ github.event.inputs.obj_id1 }}"
+            echo "::set-output name=run_job_looker_deploy::${{ github.event.inputs.obj_id1 }}"
     outputs:
-        run_job_b: ${{ steps.set.outputs.run_job_b }}
+        run_job_b: ${{ steps.set.outputs.run_job_looker_deploy }}
     
-  b:
-    name: b
+  looker_deploy:
+    name: looker_deploy
     runs-on: ubuntu-latest
     needs:
-      - a
-    if: needs.a.outputs.run_job_b == 'A'
+      - chk_folder
+    if: needs.chk_folder.outputs.run_job_looker_deploy == 'A'
     steps:
       - run: |
           echo "will deploy looker"
-  c:
-    name: c
+  deploy_status:
+    name: deploy_status
     runs-on: ubuntu-latest
     needs:
-      - a
-      - b
-    if: needs.b.result == 'skipped'
+      - chk_folder
+      - looker_deploy
+    if: needs.looker_deploy.result == 'skipped'
     steps:
-      - run: echo "C"  
+      - run: exit 1
       
