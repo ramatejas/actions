@@ -13,8 +13,8 @@ jobs:
       - run: echo ${{ github.event.inputs.obj_id1 }}
       - id: set
         run: |
-          if: ${{ github.event.inputs.obj_id1 }} == A
-          - run: echo "::set-output name=run_job_check_folder_false::no"
+        if: ${{ github.event.inputs.obj_id1 }} == A
+          echo "::set-output name=run_job_check_folder_false::no"
     outputs:
       run_job_b: ${{ steps.set.outputs.run_job_b }}
   check_folder_false:
