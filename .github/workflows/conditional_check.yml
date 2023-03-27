@@ -36,9 +36,6 @@ jobs:
       needs.chk_folder.result == 'success' && 
       (needs.looker_deploy.result == 'success' || needs.looker_deploy.result == 'skipped')
     steps:
-      - uses: actions/checkout@v3
-      - name: message
       - run: echo "You did not choose the right folder, please correct the input" 
-      - name: result
       - run: exit 1
       
