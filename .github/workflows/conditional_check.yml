@@ -15,7 +15,7 @@ jobs:
           run: |
             echo "::set-output name=run_job_looker_deploy::${{ github.event.inputs.obj_id1 }}"
     outputs:
-        run_job_b: ${{ steps.set.outputs.run_job_looker_deploy }}
+        run_job_looker_deploy: ${{ steps.set.outputs.run_job_looker_deploy }}
     
   looker_deploy:
     name: looker_deploy
