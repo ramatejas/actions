@@ -6,22 +6,30 @@ on:
         required: true
         type: string
 jobs:
-  cond_yes:
-    name: right_folder
+  a:
+    name: a
     runs-on: ubuntu-latest
     steps:
+      - run: echo "this is " ${{ github.event.inputs.obj_id1 }}
       - id: set
         run: |
-        if: ${{ github.event.inputs.obj_id1 }} == A
-          echo "::set-output name=wrong_folder_job::yes"
+          echo "::set-output name=run_job_b::yes"
     outputs:
-      wrong_folder_job: ${{ steps.set.outputs.wrong_folder }}
-  cond_no:
-    name: incorrect_folder
+      run_job_b: ${{ steps.set.outputs.run_job_b }}
+  b:
+    name: b
     runs-on: ubuntu-latest
     needs:
-      - cond_yes
-    if: needs.cond_yes.outputs.wrong_folder == 'yes'
+      - a
+    if: needs.a.outputs.run_job_b == 'yes'
     steps:
-      - run: |
-          exit 1
+      - run: echo "B"
+  c:
+    name: c
+    runs-on: ubuntu-latest
+    needs:
+      - a
+      - b
+    if: needs.b.result == 'success' || needs.b.result == 'skipped'
+    steps:
+      - run: echo "C"
