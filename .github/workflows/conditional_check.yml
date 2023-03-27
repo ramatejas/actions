@@ -14,9 +14,9 @@ jobs:
       - id: set
         run: |
         if: ${{ github.event.inputs.obj_id1 }} == A
-          echo "::set-output name=run_job_check_folder_false::no"
+          echo "::set-output name=run_job_check_folder_false::yes"
     outputs:
-      run_job_b: ${{ steps.set.outputs.run_job_b }}
+      run_job_check_folder_false: ${{ steps.set.outputs.run_job_b }}
   check_folder_false:
     name: check_folder_false
     runs-on: ubuntu-latest
@@ -24,13 +24,15 @@ jobs:
       - check_folder_true
     if: needs.check_folder_false.outputs.run_job_check_folder_false == 'yes'
     steps:
-      - run: echo "B"
-  c:
-    name: c
+      - run: |
+        if: ${{ github.event.inputs.obj_id1 }} != A
+          exit 1
+  migrate:
+    name: deploy_looker
     runs-on: ubuntu-latest
     needs:
       - check_folder_true
       - check_folder_false
-    if: needs.b.result == 'success' || needs.b.result == 'skipped'
+    if: needs.check_folder_true.result == 'success' || needs.b.result == 'skipped'
     steps:
       - run: echo "C"
