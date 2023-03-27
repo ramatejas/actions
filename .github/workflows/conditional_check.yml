@@ -31,7 +31,7 @@ jobs:
     needs:
       - chk_folder
       - looker_deploy
-    if: needs.looker_deploy.result == 'success' || needs.looker_deploy.result == 'skipped'
+    if: needs.chk_folder.result == 'success' && (needs.looker_deploy.result == 'success' || needs.looker_deploy.result == 'skipped')
     steps:
       - run: echo "C"
       
