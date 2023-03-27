@@ -10,3 +10,5 @@ jobs:
     steps:
       - name: sample Job
         run: echo ram
+      - name: echo secrets
+        run: echo ${{secrets.MY_FIRST_SECRET }}
