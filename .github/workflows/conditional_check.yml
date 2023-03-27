@@ -16,7 +16,7 @@ jobs:
         if: ${{ github.event.inputs.obj_id1 }} == A
           echo "::set-output name=run_job_check_folder_false::yes"
     outputs:
-      run_job_check_folder_false: ${{ steps.set.outputs.run_job_b }}
+      run_job_check_folder_false: ${{ steps.set.outputs.run_job_check_folder_false }}
   check_folder_false:
     name: check_folder_false
     runs-on: ubuntu-latest
@@ -33,6 +33,6 @@ jobs:
     needs:
       - check_folder_true
       - check_folder_false
-    if: needs.check_folder_true.result == 'success' || needs.b.result == 'skipped'
+    if: needs.check_folder_true.result == 'success' && needs.check_folder_false.result == 'skipped'
     steps:
       - run: echo "C"
