@@ -1,26 +1,31 @@
-name: Condition_Check_Git
-
-# Controls when the workflow will run
+name: test
 on:
-  # Allows you to run this workflow manually from the Actions tab
-   workflow_dispatch:
-    inputs:
-      obj_id1:
-        required: true
-        type: string
+  workflow_dispatch:
 jobs:
-  ram:
+  a:
+    name: a
     runs-on: ubuntu-latest
     steps:
-      - name: sample Job
-        run: echo ram
-      - name: echo secrets
-        run: echo ${{ secrets.MY_FIRST_SECRET }}
-      - name: echo INPUT
-        run: echo ${{ github.event.inputs.obj_id1 }}
-      - name: conditional_check_if
-        if: ${{ github.event.inputs.obj_id1 }} in ( 'A', '1')
-        run: exit 0
-      - name: conditional_check_else
-        if: ${{ github.event.inputs.obj_id1 }} not in ('A', '1')
-        run: exit 1
+      - run: echo "A"
+      - id: set
+        run: |
+          echo "::set-output name=run_job_b::yes"
+    outputs:
+      run_job_b: ${{ steps.set.outputs.run_job_b }}
+  b:
+    name: b
+    runs-on: ubuntu-latest
+    needs:
+      - a
+    if: needs.a.outputs.run_job_b == 'yes'
+    steps:
+      - run: echo "B"
+  c:
+    name: c
+    runs-on: ubuntu-latest
+    needs:
+      - a
+      - b
+    if: needs.b.result == 'success' || needs.b.result == 'skipped'
+    steps:
+      - run: echo "C"
