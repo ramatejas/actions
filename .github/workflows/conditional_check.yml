@@ -64,7 +64,7 @@ jobs:
       - looker_deploy
     if: |
       always() && 
-      needs.looker_deploy.result == 'skipped')
+      needs.looker_deploy.result == 'skipped'
     steps:
       - run: echo "You did not choose the right folder, please correct the input" 
       - run: exit 1
