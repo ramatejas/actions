@@ -10,7 +10,7 @@ jobs:
     name: obj_id1
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ obj_id1}}
+      - run: echo ${{ github.event.inputs.obj_id1 }}
       - id: set
         run: |
           echo "::set-output name=run_job_b::yes"
