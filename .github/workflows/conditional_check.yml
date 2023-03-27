@@ -1,12 +1,16 @@
 name: test
 on:
   workflow_dispatch:
+    inputs:
+      obj_id1:
+        required: true
+        type: string
 jobs:
   a:
-    name: a
+    name: obj_id1
     runs-on: ubuntu-latest
     steps:
-      - run: echo "A"
+      - run: echo ${{ obj_id1}}
       - id: set
         run: |
           echo "::set-output name=run_job_b::yes"
