@@ -2,8 +2,39 @@ name: conditional_check
 on:
   workflow_dispatch:
     inputs:
+      destination:
+        type: choice
+        description: Deploy to environment
+        options:
+        - dev
+        - staging
+        - prod
+      obj_type:
+        type: choice
+        description: What object type to deploy
+        default: Dashboard
+        options: 
+        - Dashboard
+        - Look
+        - Folder
+      obj_recursive:
+        type: boolean
+        description: recursive (only for Folders)
+        default: false
       obj_id1:
         required: true
+        type: string
+      obj_id2:
+        required: false
+        type: string
+      obj_id3:
+        required: false
+        type: string
+      obj_id4:
+        required: false
+        type: string
+      obj_id5:
+        required: false
         type: string
 jobs:
   chk_folder:
@@ -33,8 +64,7 @@ jobs:
       - looker_deploy
     if: |
       always() && 
-      needs.chk_folder.result == 'success' && 
-      (needs.looker_deploy.result == 'success' || needs.looker_deploy.result == 'skipped')
+      needs.looker_deploy.result == 'skipped')
     steps:
       - run: echo "You did not choose the right folder, please correct the input" 
       - run: exit 1
