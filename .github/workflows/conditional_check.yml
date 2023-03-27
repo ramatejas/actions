@@ -16,7 +16,6 @@ jobs:
             echo "::set-output name=run_job_looker_deploy::${{ github.event.inputs.obj_id1 }}"
     outputs:
         run_job_looker_deploy: ${{ steps.set.outputs.run_job_looker_deploy }}
-    
   looker_deploy:
     name: looker_deploy
     runs-on: ubuntu-latest
@@ -32,7 +31,7 @@ jobs:
     needs:
       - chk_folder
       - looker_deploy
-    if: needs.looker_deploy.result == 'skipped'
+    if: needs.looker_deploy.result == 'success' || needs.looker_deploy.result == 'skipped'
     steps:
       - run: echo "C"
       
