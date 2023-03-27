@@ -15,7 +15,6 @@ jobs:
         run: |
         if: ${{ github.event.inputs.obj_id1 }} == A
           echo "::set-output name=run_job_check_folder_false::yes"
-          echo "${{ steps.set.outputs.run_job_check_folder_false }}"
     outputs:
       run_job_check_folder_false: ${{ steps.set.outputs.run_job_check_folder_false }}
   check_folder_false:
@@ -26,5 +25,4 @@ jobs:
     if: needs.check_folder_true.outputs.run_job_check_folder_false == 'yes'
     steps:
       - run: |
-        if: ${{ github.event.inputs.obj_id1 }} != A
           exit 1
