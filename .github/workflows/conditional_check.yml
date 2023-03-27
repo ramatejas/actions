@@ -26,5 +26,13 @@ jobs:
     steps:
       - run: |
           echo "will deploy looker"
-  
+  c:
+    name: c
+    runs-on: ubuntu-latest
+    needs:
+      - a
+      - b
+    if: needs.b.result == 'skipped'
+    steps:
+      - run: echo "C"  
       
