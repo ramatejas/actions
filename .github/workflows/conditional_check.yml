@@ -26,5 +26,5 @@ jobs:
     steps:
       - run: |
           echo "B"
-          exit 1
+  
       
