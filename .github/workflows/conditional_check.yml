@@ -13,7 +13,7 @@ jobs:
         - run: echo "this is " ${{ github.event.inputs.obj_id1 }}
         - id: set
           run: |
-            echo "::set-output name=run_job_b::A"
+            echo "::set-output name=run_job_b::${{ github.event.inputs.obj_id1 }}"
     outputs:
         run_job_b: ${{ steps.set.outputs.run_job_b }}
     
@@ -22,9 +22,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - a
-    if: needs.a.outputs.run_job_b == 'A'
+    if: needs.a.outputs.run_job_b == 'B'
     steps:
       - run: |
-          echo "B"
+          echo "will deploy looker"
   
       
