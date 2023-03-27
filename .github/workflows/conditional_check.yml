@@ -36,5 +36,6 @@ jobs:
       needs.chk_folder.result == 'success' && 
       (needs.looker_deploy.result == 'success' || needs.looker_deploy.result == 'skipped')
     steps:
-      - run: echo "You did not choose the right folder" exit 1
+      - run: echo "You did not choose the right folder" 
+          exit 1
       
