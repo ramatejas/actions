@@ -14,7 +14,7 @@ jobs:
         - id: set
           run: |
             echo "::set-output name=run_job_b::yes"
-            if [[ ${{ github.event.inputs.obj_id1 }} == B]]
+            if [[ ${{ github.event.inputs.obj_id1 }} == 'B']]
             then
               exit 0
             fi
