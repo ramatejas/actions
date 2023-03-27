@@ -19,8 +19,8 @@ jobs:
       - name: echo INPUT
         run: echo ${{ github.event.inputs.obj_id1 }}
       - name: conditional_check_if
-        if: ${{ github.event.inputs.obj_id1 }} == 'A'
+        if: ${{ github.event.inputs.obj_id1 }} in ( 'A', '1')
         run: exit 0
       - name: conditional_check_else
-        if: ${{ github.event.inputs.obj_id1 }} != 'A'
+        if: ${{ github.event.inputs.obj_id1 }} not in ('A', '1')
         run: exit 1
