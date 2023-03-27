@@ -18,6 +18,6 @@ jobs:
         run: echo ${{ secrets.MY_FIRST_SECRET }}
       - name: echo INPUT
         run: echo ${{ github.event.inputs.obj_id1 }}
-      - if: ${{ github.event.inputs.obj_id1 }} != 'A'
-        name: conditional_check
+      - name: conditional_check
+        if: ${{ github.event.inputs.obj_id1 }} != 'A'
         run: exit 1
