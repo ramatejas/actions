@@ -19,8 +19,8 @@ jobs:
       - name: echo INPUT
         run: echo ${{ github.event.inputs.obj_id1 }}
       - name: conditional_check_if
-        if: contains(['A'], ${{ github.event.inputs.obj_id1 }})
+        if: contains(['A'], github.event.inputs.obj_id1)
         run: echo :-)
       - name: conditional_check_else
-        if: false == contains(['A'], ${{ github.event.inputs.obj_id1 }})
+        if: false == contains(['A'], github.event.inputs.obj_id1)
         run: echo :-(
