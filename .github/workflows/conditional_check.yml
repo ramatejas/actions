@@ -15,4 +15,6 @@ jobs:
       - name: sample Job
         run: echo ram
       - name: echo secrets
-        run: echo ${{secrets.MY_FIRST_SECRET }}
+        run: echo ${{ secrets.MY_FIRST_SECRET }}
+      - name: echo INPUT
+        run: echo ${{ github.event.inputs.obj_id1 }}
