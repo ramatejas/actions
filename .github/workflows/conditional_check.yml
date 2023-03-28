@@ -24,10 +24,10 @@ on:
       folder_id:
         required: true
         type: string
+        default: A
       obj_id1:
         required: true
         type: string
-        default: A
       obj_id2:
         required: false
         type: string
