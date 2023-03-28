@@ -21,6 +21,9 @@ on:
         type: boolean
         description: recursive (only for Folders)
         default: false
+      folder_id:
+        required: true
+        type: string
       obj_id1:
         required: true
         type: string
@@ -41,10 +44,10 @@ jobs:
     name: chk_folder
     runs-on: ubuntu-latest
     steps:
-        - run: echo "this is " ${{ github.event.inputs.obj_id1 }}
+        - run: echo "this is " ${{ github.event.inputs.folder_id }}
         - id: set
           run: |
-            echo "::set-output name=run_job_looker_deploy::${{ github.event.inputs.obj_id1 }}"
+            echo "::set-output name=run_job_looker_deploy::${{ github.event.inputs.folder_id }}"
     outputs:
         run_job_looker_deploy: ${{ steps.set.outputs.run_job_looker_deploy }}
   looker_deploy:
