@@ -59,7 +59,7 @@ jobs:
     if: needs.chk_folder.outputs.run_job_looker_deploy == 'A'
     steps:
       - name: ldeploy
-      - run: echo "ABCD"
+        run: echo "ABCD"
   deploy_status:
     name: deploy_status
     runs-on: ubuntu-latest
