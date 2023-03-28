@@ -22,6 +22,7 @@ on:
         description: recursive (only for Folders)
         default: false
       folder_id:
+      DEFAULT: A
         required: true
         type: string
       obj_id1:
