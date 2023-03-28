@@ -59,7 +59,7 @@ jobs:
     if: needs.chk_folder.outputs.run_job_looker_deploy == 'A'
     steps:
       - name: ldeploy
-      - uses: ramatejas/actions/.github/workflows/conditional_check.yml@main
+      - run: echo "ABCD"
   deploy_status:
     name: deploy_status
     runs-on: ubuntu-latest
