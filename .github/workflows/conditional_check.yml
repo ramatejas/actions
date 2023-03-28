@@ -58,8 +58,8 @@ jobs:
       - chk_folder
     if: needs.chk_folder.outputs.run_job_looker_deploy == 'A'
     steps:
-      - run: |
-          echo "will deploy looker"
+      - name: ldeploy
+      - uses: ramatejas/actions/.github/workflows/conditional_check.yml@main
   deploy_status:
     name: deploy_status
     runs-on: ubuntu-latest
