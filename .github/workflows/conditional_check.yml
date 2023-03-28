@@ -58,6 +58,7 @@ jobs:
       - chk_folder
     if: needs.chk_folder.outputs.run_job_looker_deploy == 'A'
     steps:
+      - uses: actions/checkout@v3
       - name: ldeploy
         uses: ramatejas/actions/myscript.sh@main
   deploy_status:
